@@ -1,6 +1,7 @@
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 40px;
+  background-color: lightgray;
 }
 
 ol, ul {
@@ -15,6 +16,15 @@ ol, ul {
 
 #searchform{
   margin-left: 50px;
+}
+
+input{
+  height: 22px;
+  font-size: 20px;
+}
+
+td{
+  font-size: 20px;
 }
 
 .kbd-navigation .square:focus {
