@@ -68,13 +68,19 @@ componentDidMount() {
   .then(function(string) {
   var dict = string.split(",,");
   console.log(dict.length);
-  console.log(dict.length);
   dict.forEach(function(el, ind) {
     var temprow;
-    console.log(ind);
+    //console.log(ind);
     temprow = el.split(",");
     temprow = temprow.splice(1, 2);
-    masterlist.push(temprow);
+
+    if (temprow[0].toUpperCase() !== temprow[1].toUpperCase()){
+        masterlist.push(temprow);
+    }
+    else{
+        console.log("SAMA "+temprow[0]);
+    }
+    
   })
   console.log(masterlist.length);
   masterlist.sort();
@@ -82,7 +88,7 @@ componentDidMount() {
   table.setAttribute("id", "dict");
   var row;
   masterlist.forEach(function(el, ind){
-    console.log("master "+ind);
+    //console.log("master "+ind);
     row = table.insertRow();
     var cell = row.insertCell();
     cell.innerHTML = el[0];
