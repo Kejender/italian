@@ -31,7 +31,7 @@ class ItalianDictionary extends React.Component {
     for (i = 0; i < tablerow.length; i++) {
       firstcell = tablerow[i].getElementsByTagName("td")[0];
       txtValue = firstcell.textContent || firstcell.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      if (txtValue.toUpperCase().indexOf(filter) === 0) {
         tablerow[i].style.display = "";
       } else {
         tablerow[i].style.display = "none";
