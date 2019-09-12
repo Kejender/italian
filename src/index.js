@@ -77,6 +77,7 @@ componentDidMount() {
     masterlist.push(temprow);
   })
   console.log(masterlist.length);
+  masterlist.sort();
   var table = document.createElement("table");
   table.setAttribute("id", "dict");
   var row;
