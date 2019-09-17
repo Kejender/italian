@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Nav from 'react-bootstrap/Nav';
 import './index.css';
+import './bootstrap.min.css';
 import dictionary from './italian.csv';
 
 const Navi = (props) => {
