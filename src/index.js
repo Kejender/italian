@@ -1,24 +1,90 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Nav from 'react-bootstrap/Nav';
 import './index.css';
 import dictionary from './italian.csv';
+
+const Navi = (props) => {
+
+/*
+onClick={props.toggleVisible}
+toggleVisible={this.toggleVisibleContent}
+*/
+
+    return (
+      <Nav variant="tabs" defaultActiveKey="home" toggleVisible={props.toggleVisibleContent} className="justify-content-left" >
+      <Nav.Link href="#" onClick={props.toggleVisible} eventKey="home">Search</Nav.Link>
+      <Nav.Link href="#" onClick={props.toggleVisible} >About</Nav.Link>
+    </Nav>
+    );
+}
+
 
 const SearchDict = (props) => {
   return (
     <div>
+    <div id="home">
 		<input type="text" id="searchfield" onKeyUp={props.onKeyUp} placeholder="Search for italian words"></input>
-        <div id="dict-ital"></div>
+    <div id="dict-ital"></div>
+    </div>
     </div>
   );
 }
 
+const DictList = (props) => {
+
+  let mastertable = props.value;
+  console.log(mastertable.length);
+
+  function createMarkup(){
+     return {__html: mastertable};
+  }
+
+  return (
+    <div id="home">
+    <div dangerouslySetInnerHTML={createMarkup()} />
+    </div>
+  );
+}
+
+const About = (props) => {
+    return (
+      <div id="about">{props.value}</div>
+    );
+  }
+
 class ItalianDictionary extends React.Component {
   
-  /*constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
+        dictionaryTable: "1",
+        about: "joo",
+        isEmptyState: true
     };
-  }*/
+  }
+
+  toggleVisibleContent = () => {
+
+    console.log("toggling");
+    if (this.state.isEmptyState){
+        this.setState({
+        ...this.state,
+        isEmptyState: false,
+        isVisibleState: true,
+        about: "etta"
+        })
+    }
+    else {
+        this.setState({
+            ...this.state,
+            isEmptyState: true,
+            isVisibleState: false
+        })
+
+    }
+
+  }
 
   search(){
     console.log("search");
@@ -40,10 +106,24 @@ class ItalianDictionary extends React.Component {
   }
 
   renderSearch(i) {
+
+    /*{this.state.isEmptyState && <SearchDict onKeyUp={() => this.search()} />}
+    {this.state.isEmptyState && <DictList value={this.state.dictionaryTable}/>}
+    {this.state.isVisibleState && <About value={this.state.about}/>}
+    
+    <SearchDict onKeyUp={() => this.search()} />
+    <DictList value={this.state.dictionaryTable}/>
+    <About value={this.state.about}/>
+    */
+
+
     return (
-      <SearchDict
-      onKeyUp={() => this.search()}
-      />
+    <div>
+    <Navi toggleVisible={this.toggleVisibleContent}/>
+    {this.state.isEmptyState && <SearchDict onKeyUp={() => this.search()} />}
+    {this.state.isEmptyState && <DictList value={this.state.dictionaryTable}/>}
+    {this.state.isVisibleState && <About value={this.state.about}/>}
+    </div>
     );
   }
 
@@ -59,18 +139,20 @@ class ItalianDictionary extends React.Component {
 
 componentDidMount() {
   
+  let dictionaryTable = this.state.dictionaryTable;
+  //let asia = this.state.asia;
   var masterlist = [];
 
-   fetch(dictionary)
-  .then(function(response) {
+  fetch(dictionary)
+  .then(response => {
   return response.text();
   })
-  .then(function(string) {
+  .then(string => {
   var dict = string.split(",,");
   console.log(dict.length);
-  dict.forEach(function(el, ind) {
+
+  dict.forEach(el => {
     var temprow;
-    //console.log(ind);
     temprow = el.split(",");
     temprow = temprow.splice(1, 2);
 
@@ -80,26 +162,46 @@ componentDidMount() {
     else{
         console.log("SAMA "+temprow[0]);
     }
-    
-  })
+  }); // dict foreach
+
   console.log(masterlist.length);
   masterlist.sort();
-  var table = document.createElement("table");
+  let table = document.createElement("table");
+  table = document.createElement("table");
   table.setAttribute("id", "dict");
-  var row;
-  masterlist.forEach(function(el, ind){
+  let row;
+
+
+  masterlist.forEach(el => {
     //console.log("master "+ind);
     row = table.insertRow();
-    var cell = row.insertCell();
+    let cell = row.insertCell();
     cell.innerHTML = el[0];
     cell = row.insertCell();
     cell.innerHTML = el[1];
-  
-  })
-  document.getElementById("dict-ital").appendChild(table);
   });
 
-}
+  return table;
+  })
+  .then(table => {
+
+    let texttable = "<table id=\"dict\"><tbody>";
+    masterlist.forEach(function(el) {
+      texttable = texttable +"<tr><td>"+el[0]+"</td><td>"+el[1]+"</td></tr>";
+    });
+
+    return texttable;
+  }).then(texttable => {
+    texttable = texttable + "</tbody></table>";
+    dictionaryTable = texttable;
+    this.setState({dictionaryTable});
+
+  });
+    
+    
+  // fetch then
+
+} // componentDidMount
 
   render() {
     return (
