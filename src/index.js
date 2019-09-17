@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import './index.css';
 //import './bootstrap.min.css';
 import dictionary from './italian.csv';
+import about from './about.md';
 
 const Navi = (props) => {
 
@@ -12,12 +13,12 @@ onClick={props.toggleVisible}
 toggleVisible={this.toggleVisibleContent}
 */
 
-    return (
-      <Nav variant="tabs" defaultActiveKey="home" toggleVisible={props.toggleVisibleContent} className="justify-content-left" >
-      <Nav.Link href="#" onClick={props.toggleVisible} eventKey="home">Search</Nav.Link>
-      <Nav.Link href="#" onClick={props.toggleVisible} >About</Nav.Link>
-    </Nav>
-    );
+  return (
+    <Nav variant="tabs" defaultActiveKey="home" toggleVisible={props.toggleVisibleContent} className="justify-content-left" >
+    <Nav.Link href="#" onClick={props.toggleVisible} eventKey="home">Search</Nav.Link>
+    <Nav.Link href="#" onClick={props.toggleVisible} >About</Nav.Link>
+  </Nav>
+  );
 }
 
 
@@ -60,7 +61,7 @@ class ItalianDictionary extends React.Component {
     super(props);
     this.state = {
         dictionaryTable: "1",
-        about: "joo",
+        abouttext: "joo",
         isEmptyState: true
     };
   }
@@ -72,8 +73,7 @@ class ItalianDictionary extends React.Component {
         this.setState({
         ...this.state,
         isEmptyState: false,
-        isVisibleState: true,
-        about: "etta"
+        isVisibleState: true
         })
     }
     else {
@@ -123,7 +123,7 @@ class ItalianDictionary extends React.Component {
     <Navi toggleVisible={this.toggleVisibleContent}/>
     {this.state.isEmptyState && <SearchDict onKeyUp={() => this.search()} />}
     {this.state.isEmptyState && <DictList value={this.state.dictionaryTable}/>}
-    {this.state.isVisibleState && <About value={this.state.about}/>}
+    {this.state.isVisibleState && <About value={this.state.abouttext}/>}
     </div>
     );
   }
@@ -141,8 +141,22 @@ class ItalianDictionary extends React.Component {
 componentDidMount() {
   
   let dictionaryTable = this.state.dictionaryTable;
+  let abouttext = this.state.abouttext;
   //let asia = this.state.asia;
   var masterlist = [];
+
+  console.log(about);
+
+  fetch(about)
+  .then(response => {
+    //console.log(response.text());
+    return response.text();
+  })
+  .then(string => {
+    console.log(string);
+    abouttext = string;
+    this.setState({abouttext});
+  });
 
   fetch(dictionary)
   .then(response => {
