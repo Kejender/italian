@@ -7,7 +7,11 @@ body {
 ol, ul {
   padding-left: 30px;
 }
+.nav{
 
+margin-bottom: 20px;
+
+}
 .board-row:after {
   clear: both;
   content: "";
@@ -20,6 +24,7 @@ ol, ul {
 
 input{
   height: 22px;
+  width: 300px;
   font-size: 20px;
 }
 
