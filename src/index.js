@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Nav from 'react-bootstrap/Nav';
+import InputGroup from 'react-bootstrap/InputGroup'
+import FormControl from 'react-bootstrap/FormControl'
 import './index.css';
 import dictionary from './italian.csv';
 import about from './about.md';
@@ -17,7 +19,15 @@ const Navi = (props) => {
 const SearchDict = (props) => {
   return (
     <div id="search">
-		  <input type="text" id="searchfield" onKeyUp={props.onKeyUp} placeholder="Search for italian words"></input>
+		  <InputGroup className="mb-3">
+    <FormControl
+      id='searchfield'
+      onKeyUp={props.onKeyUp}
+      placeholder="Search italian words"
+      aria-label="Search italian words"
+      aria-describedby="basic-addon2"
+    />
+  </InputGroup>
       <div id="dict-ital"></div>
     </div>
   );

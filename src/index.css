@@ -1,7 +1,7 @@
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 40px;
-  background-color: lightgray;
+  background-color: white;
 }
 
 ol, ul {
@@ -22,16 +22,65 @@ margin-bottom: 20px;
   margin-left: 50px;
 }
 
-input{
-  height: 22px;
+#searchfield{
+  padding: 10px;
+  margin: 5px 0px;
   width: 300px;
   font-size: 20px;
 }
 
+#searchwrap1 {
+  display: grid;
+}
+
+#searchwrap2 {
+  display: grid;
+}
+
+#searchbutton {
+
+}
+
+#search1 {
+  padding: 10px 0;
+  grid-column: 1 / 2;
+  grid-row: 1/1;
+  width: 450px;
+}
+
+#search2 {
+  padding: 10px 0;
+  grid-column: 2 / 2;
+  grid-row: 1/1;
+  width: 320px;
+}
+
+#save {
+  grid-column: 1 / 2;
+  grid-row: 1/1;
+}
+
+#resultwrap {
+  margin: 5px 0px;
+  width: 450px;
+  border: 1px solid lightgray;
+}
+
+#cancel {
+  grid-column: 2 / 2;
+  grid-row: 1/1;
+}
+
 td{
   font-size: 20px;
+  vertical-align: top;
+  min-width: 200px;
 }
 
 .kbd-navigation .square:focus {
   background: #ddd;
+}
+
+.nav-link.active{
+  background: #28a745;
 }
