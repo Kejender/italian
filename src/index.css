@@ -37,10 +37,6 @@ margin-bottom: 20px;
   display: grid;
 }
 
-#searchbutton {
-
-}
-
 #search1 {
   padding: 10px 0;
   grid-column: 1 / 2;
