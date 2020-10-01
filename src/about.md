@@ -1,3 +1,1 @@
-About this project to be written
-
-This is a dictionary finder
+Hi! This is an italian dictionary finder, based on a table of 2000 most common italian words and their english translations. The list is a bit shorter though: I removed some names and duplicates. The word list was created from italian tv subtitles. I'd like to pay my respect to who made the list but I cannot find the site any longer!
